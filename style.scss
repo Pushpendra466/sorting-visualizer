@@ -1,0 +1,32 @@
+#sorting-container{
+
+    .btn{
+        display: flex;
+        justify-content: center;
+        button{
+            font-size: 1.2rem;
+        }
+        margin: 10px;
+        
+    }
+    
+    #sorting-box{
+
+        margin: 0 auto;
+        width: 80vw;
+        height: 72vh;
+        border: 1px solid black;
+        display: flex;
+        transform: scaleY(-1);
+
+        .bar{
+            
+            border: 1px solid black;
+            width: 2vw;
+            background: crimson;
+            }
+       
+       
+    }
+   
+}
