@@ -9,9 +9,7 @@
         margin: 10px;
         
     }
-    
-    #sorting-box{
-
+    .sorting-box {
         margin: 0 auto;
         width: 80vw;
         height: 72vh;
@@ -19,14 +17,12 @@
         display: flex;
         transform: scaleY(-1);
 
-        .bar{
+        div[class^="bar"]{
             
             border: 1px solid black;
             width: 2vw;
             background: crimson;
             }
-       
-       
     }
    
 }
