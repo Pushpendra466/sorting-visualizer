@@ -1,15 +1,18 @@
 // box for bars of different sorting
 let bubbleSortBox = document.querySelector('#bubble-sorting-box');
 let selectionSortBox = document.querySelector('#selection-sorting-box');
+let insertionSortBox = document.querySelector('#insertion-sorting-box');
 
 // calling randomBars to fill the boxes of different sorting
 let number_of_bars = 40;
 randomBars(bubbleSortBox);
 randomBars(selectionSortBox);
+randomBars(insertionSortBox);
 
 // boolean to check wheather sorting is done or not
 let done_bubbleSort = false;
 let done_selectionSort = false;
+let done_insertionSort = false;
 // on click Sort button 
 function bubbleSort(){
     if(!done_bubbleSort)
@@ -19,6 +22,11 @@ function bubbleSort(){
 function selectionSort(){
     if(!done_selectionSort)
     {startSelectionSort();}
+}
+
+function insertionSort(){
+    if(!done_insertionSort)
+    {startInsertionSort();}
 }
 
 // on click of reset button of different sortings
@@ -38,8 +46,16 @@ function resetSelectionSort(){
     randomBars(selectionSortBox);
 }
 
-// randomBars function to fill the boxes with bars
+function resetInsertionSort(){
+    while(insertionSortBox.firstChild){
+        insertionSortBox.removeChild(insertionSortBox.firstChild);
+    }
+    done_insertionSort = false;
+    randomBars(insertionSortBox);
+}
 
+
+// randomBars function to fill the boxes with bars
 function randomBars(sortingBox)
 {console.log(sortingBox.id.substring(0,sortingBox.id.indexOf('-')));
     let name = sortingBox.id.substring(0,sortingBox.id.indexOf('-'));
@@ -55,6 +71,7 @@ function randomBars(sortingBox)
 }}
 
 // #b45f70
+// For bubble sort
 function interChange(bar1,bar2){
     return new Promise((resolve)=>{
        let temp = bar1.style.order;
@@ -157,23 +174,46 @@ async function startSelectionSort(){
         done_selectionSort = true;
 }
 
+// Insertion Sort
 
 
-// void Selection_sort(int a[],int n){
+async function startInsertionSort(){
+    let bars = document.querySelectorAll('.bar-insertion');
+  for(let i=1;i<number_of_bars;i++){
+      let j = i-1;
+      let hi = parseInt(bars[i].style.height.substring(0,bars[i].style.height.length-2));
+      let hj = parseInt(bars[j].style.height.substring(0,bars[j].style.height.length-2));
+      bars[i].style.background = "#b45f70";
+      await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },200)
+          );
+      while(j>=0 && parseInt(bars[j].style.height.substring(0,bars[j].style.height.length-2))>hi){
+          bars[j].style.background = "#b45f70";
 
-//     for(int i=0;i<n-1;i++){
-    
-//     int small = i;
-    
-//     for(int j=i;j<n;j++){
-    
-//         if(a[j]<a[small]){
-//             small = j;
-//         }
-    
-//     }
-//     //Using inbuilt Swap Function 
-//     swap(a[i],a[small]);
-//     }
-    
-//     }
+          bars[j+1].style.height = bars[j].style.height;
+
+          j--;
+
+          await new Promise((resolve)=>{
+              setTimeout(()=>{
+              resolve();
+              },200)
+          });
+          for(let k=i;k>=0;k--){
+              bars[k].style.background = 'green';
+          }
+          bars[j+1].style.height = hi+'vh';
+
+          await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },200)
+          );
+
+          bars[i].style.background = "green";
+      }
+  }
+}
+
